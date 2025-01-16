@@ -1,0 +1,2 @@
+# All other components to be installed from `pyproject.toml` by `poetry install`
+poetry==1.7.1
