@@ -1,0 +1,78 @@
+{
+    "id": "https://api.example.com/api/REST/schema/item#",
+    "title": "Item",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "url": {
+            "type": "string",
+            "format": "uri"
+        },
+        "name": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "object",
+            "patternProperties": {
+                ".+": {}
+            },
+            "additionalProperties": false
+        }
+    },
+    "definitions": {
+        "id": {
+            "title": "id",
+            "type": "string"
+        },
+        "url": {
+            "title": "URL",
+            "type": "string"
+        },
+        "name": {
+            "title": "Name",
+            "type": "string"
+        },
+        "fields": {
+            "title": "Fields",
+            "type": "object",
+            "properties": {
+                "required": {
+                    "type": "boolean"
+                },
+                "schema": {
+                    "$ref": "#/definitions/json-type"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "fieldId": {
+                    "type": "string"
+                },
+                "autoCompleteUrl": {
+                    "type": "string"
+                },
+                "hasDefaultValue": {
+                    "type": "boolean"
+                },
+                "operations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "allowedValues": {
+                    "type": "array",
+                    "items": {}
+                },
+                "defaultValue": {}
+            },
+            "additionalProperties": false,
+            "required": [
+                "required"
+            ]
+        }
+    },
+    "additionalProperties": false
+}

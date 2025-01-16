@@ -1,0 +1,17 @@
+kind: source
+spec:
+  name: "{{cookiecutter.plugin_name}}"
+  registry: "grpc"
+  path: "localhost:7777"
+  tables: ['*']
+  destinations: ["sqlite"]
+  spec:
+
+---
+kind: destination
+spec:
+  name: sqlite
+  path: cloudquery/sqlite
+  version: "v2.9.1"
+  spec:
+    connection_string: ./db.sqlite
