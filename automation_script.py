@@ -122,26 +122,38 @@ force_sync()
 
 # Step 6: Run cookiecutter refactoring
 try:
-    # Ensure we are in the correct working directory
-    print(CYAN + "Ensuring correct working directory for cookiecutter execution..." + RESET)
+    print(CYAN + "Running cookiecutter refactoring..." + RESET)
+
+    # Change to the directory to ensure proper execution context
     os.chdir(plugins_dir)
-    print(GREEN + f"Current working directory: {os.getcwd()}" + RESET)
+    print(GREEN + f"Changed working directory to: {plugins_dir}" + RESET)
 
     # Run the cookiecutter command
-    print(CYAN + "Running cookiecutter refactoring..." + RESET)
-    run_command(f"pipx run cookiecutter . --no-input")  # Use `.` to indicate the current directory
+    run_command(f"pipx run cookiecutter {plugins_dir} --no-input")
     print(GREEN + "Performed cookiecutter refactoring." + RESET)
 
-    # Validate the expected plugin folder
+    # Confirm that the refactored plugin directory exists
     plugin_path = plugins_dir / plugin_name
     if not plugin_path.is_dir():
         print(RED + f"Error: Plugin directory '{plugin_path}' not found after refactoring." + RESET)
         sys.exit(1)
     print(GREEN + f"Plugin directory after refactoring: {plugin_path}" + RESET)
 
+    # Ensure filesystem is fully updated before deleting cookiecutter.json
+    print(CYAN + "Forcing filesystem sync before deleting cookiecutter.json..." + RESET)
+    run_command("sync")
+    print(GREEN + "Filesystem synced successfully." + RESET)
+
+    # Delete cookiecutter.json after successful refactoring
+    cookiecutter_json_path = plugins_dir / "cookiecutter.json"
+    if cookiecutter_json_path.is_file():
+        cookiecutter_json_path.unlink()
+        print(GREEN + "Deleted cookiecutter.json after successful refactoring." + RESET)
+
 except Exception as e:
     print(RED + f"Error during cookiecutter refactoring: {e}" + RESET)
     sys.exit(1)
+
 
 finally:
     # Restore the original working directory
