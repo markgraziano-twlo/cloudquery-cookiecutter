@@ -1,1 +1,1 @@
-from .{{cookiecutter.record_type}}  import Items as Items
+from .{{cookiecutter.record_type}} import {{cookiecutter.RecordTypeClass}}
