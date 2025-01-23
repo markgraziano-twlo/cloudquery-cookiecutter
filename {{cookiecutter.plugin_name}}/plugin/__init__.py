@@ -1,1 +1,1 @@
-from .plugin import {{cookiecutter.PluginName}}Plugin as {{cookiecutter.PluginName}}Plugin
+from .plugin import {{cookiecutter.PluginName}}Plugin
